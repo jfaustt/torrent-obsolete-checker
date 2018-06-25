@@ -1,3 +1,4 @@
+import time
 from qbittorrent import Client
 
 if __name__ == '__main__':
@@ -14,8 +15,15 @@ if __name__ == '__main__':
 				if 'This torrent does not exist' in tt['msg']:
 					print('AnimeBytes - ' + t['name'])
 					count += 1
+					break
 				elif 'Unregistered torrent' in tt['msg']:
 					print('Other      - ' + t['name'])
 					count += 1
+					break
 
-	print('\n' + str(count) + ' obsolete torrents found!')
+		time.sleep(.001) # The script freezes if qBittorrent is queried too quickly
+
+	if count > 0:
+		print()
+
+	print(str(count) + ' obsolete torrents found!')
